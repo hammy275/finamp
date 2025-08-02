@@ -49,7 +49,7 @@ class AlbumScreenContentFlexibleSpaceBar extends StatelessWidget {
     GetIt.instance<AudioServiceHelper>();
     QueueService queueService = GetIt.instance<QueueService>();
 
-    void playAlbum() {
+    void playAlbum(FinampPlaybackOrder playbackOrder) {
       queueService.startPlayback(
         items: items,
         source: QueueItemSource(
@@ -62,24 +62,7 @@ class AlbumScreenContentFlexibleSpaceBar extends StatelessWidget {
           item: parentItem,
           contextNormalizationGain: isPlaylist ? null : parentItem.normalizationGain,
         ),
-        order: FinampPlaybackOrder.linear,
-      );
-    }
-
-    void shuffleAlbum() {
-      queueService.startPlayback(
-        items: items,
-        source: QueueItemSource(
-          type: isPlaylist ? QueueItemSourceType.playlist : QueueItemSourceType.album,
-          name: QueueItemSourceName(
-            type: QueueItemSourceNameType.preTranslated,
-            pretranslatedName: parentItem.name ?? AppLocalizations.of(context)!.placeholderSource,
-          ),
-          id: parentItem.id,
-          item: parentItem,
-          contextNormalizationGain: isPlaylist ? null : parentItem.normalizationGain,
-        ),
-        order: FinampPlaybackOrder.shuffled,
+        order: playbackOrder,
       );
     }
 
@@ -238,16 +221,23 @@ class AlbumScreenContentFlexibleSpaceBar extends StatelessWidget {
                       CTAMedium(
                         text: AppLocalizations.of(context)!.playButtonLabel,
                         icon: TablerIcons.player_play,
-                        onPressed: () => playAlbum(),
-                        // set the minimum width as 25% of the screen width,
-                        minWidth: MediaQuery.of(context).size.width * 0.25,
+                        onPressed: () => playAlbum(FinampPlaybackOrder.linear),
+                        // set the minimum width as 20% of the screen width,
+                        minWidth: MediaQuery.of(context).size.width * 0.2,
                       ),
                       CTAMedium(
                         text: AppLocalizations.of(context)!.shuffleButtonLabel,
                         icon: TablerIcons.arrows_shuffle,
-                        onPressed: () => shuffleAlbum(),
-                        // set the minimum width as 25% of the screen width,
-                        minWidth: MediaQuery.of(context).size.width * 0.25,
+                        onPressed: () => playAlbum(FinampPlaybackOrder.shuffled),
+                        // set the minimum width as 20% of the screen width,
+                        minWidth: MediaQuery.of(context).size.width * 0.2,
+                      ),
+                      CTAMedium(
+                        text: AppLocalizations.of(context)!.randomizeButtonLabel,
+                        icon: TablerIcons.dice,
+                        onPressed: () => playAlbum(FinampPlaybackOrder.randomized),
+                        // set the minimum width as 20% of the screen width,
+                        minWidth: MediaQuery.of(context).size.width * 0.2,
                       ),
                       OverflowMenuButton(
                         onPressed: () => isPlaylist

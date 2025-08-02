@@ -459,6 +459,13 @@ class QueueService {
       order = FinampPlaybackOrder.linear;
     }
 
+    // Randomized is custom, need to randomize manually
+    if (order == FinampPlaybackOrder.randomized) {
+      Random random = Random();
+      items = List.generate(1000, (_) => items[random.nextInt(items.length)]);
+      order = FinampPlaybackOrder.linear;
+    }
+
     if (startingIndex == null) {
       if (order == FinampPlaybackOrder.shuffled) {
         startingIndex = Random().nextInt(items.length);

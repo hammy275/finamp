@@ -41,6 +41,8 @@ class PlayerButtonsShuffle extends StatelessWidget {
         return AppLocalizations.of(context)!.playbackOrderLinearButtonTooltip;
       case FinampPlaybackOrder.shuffled:
         return AppLocalizations.of(context)!.playbackOrderShuffledButtonTooltip;
+      case FinampPlaybackOrder.randomized:
+        return "Never shown to users.";
     }
   }
 }

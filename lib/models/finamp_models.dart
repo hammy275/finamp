@@ -1734,6 +1734,8 @@ enum FinampPlaybackOrder {
   shuffled,
   @HiveField(1)
   linear,
+  @HiveField(2)
+  randomized,
 }
 
 @HiveType(typeId: 51)

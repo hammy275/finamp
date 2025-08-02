@@ -1538,6 +1538,8 @@ class FinampPlaybackOrderAdapter extends TypeAdapter<FinampPlaybackOrder> {
         writer.writeByte(0);
       case FinampPlaybackOrder.linear:
         writer.writeByte(1);
+      case FinampPlaybackOrder.randomized:
+        writer.writeByte(2);
     }
   }
 

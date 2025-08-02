@@ -432,6 +432,7 @@
       }
     }
   },
+  "randomizeButtonLabel": "Randomize",
   "playbackActionPagePlay": "Play",
   "@playbackActionPagePlay": {
     "description": "Label for the playback action page that contains all actions related to playing in order"
